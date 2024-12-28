@@ -1,83 +1,31 @@
-import React from 'react'
+import { rowStructure } from '@/app/lib/dataStructures';
+import Columns from './Columns/Columns';
 import Searchbar from './Searchbar'
+import Rows from './Rows/Rows';
 
-function Table() {
+const columns = ['ID Student', 'Mark', 'Weight', 'ID Teacher', 'ID Subject', 'Date', 'Edit'];
+
+// const rows = [
+//     rowStructure(1, 'jurek', 'ogorek', 4, 'Joanna Marchut', 'matematyka'),
+//     rowStructure(2, 'robert', 'kulski', 3, 'Joanna Marchut', 'matematyka'),
+//     rowStructure(1, 'jurek', 'ogorek', 2, 'Adam Stal', 'polski'),
+//     rowStructure(2, 'robert', 'kulski', 1, 'Katarzyna Nowak', 'angielski'),
+// ]
+
+
+function Table({ data }) {
+    console.log(data)
     return (
         <div>
-            <Searchbar/>
+            <Searchbar />
             <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
-                <table className="w-full text-left table-auto min-w-max">
-                    
-                    <tbody>
-                        <tr className="hover:bg-slate-50 border-b border-slate-200">
-                            <td className="p-4 py-5">
-                                <p className="block font-semibold text-sm text-slate-800">PROJ1001</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">John Doe</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">$1,200.00</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-01</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-15</p>
-                            </td>
-                        </tr>
-                        <tr className="hover:bg-slate-50 border-b border-slate-200">
-                            <td className="p-4 py-5">
-                                <p className="block font-semibold text-sm text-slate-800">PROJ1002</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">Jane Smith</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">$850.00</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-05</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-20</p>
-                            </td>
-                        </tr>
-                        <tr className="hover:bg-slate-50 border-b border-slate-200">
-                            <td className="p-4 py-5">
-                                <p className="block font-semibold text-sm text-slate-800">PROJ1003</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">Acme Corp</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">$2,500.00</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-07</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-21</p>
-                            </td>
-                        </tr>
-                        <tr className="hover:bg-slate-50 border-b border-slate-200">
-                            <td className="p-4 py-5">
-                                <p className="block font-semibold text-sm text-slate-800">PROJ1004</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">Global Inc</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">$4,750.00</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-10</p>
-                            </td>
-                            <td className="p-4 py-5">
-                                <p className="text-sm text-slate-500">2024-08-25</p>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table className="w-full text-left">
+                    <Columns
+                        columns={columns}
+                    />
+                    <Rows
+                        data={data}
+                    />
                 </table>
 
                 <div className="flex justify-between items-center px-4 py-3">

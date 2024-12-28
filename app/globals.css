@@ -19,3 +19,11 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+input.editable {
+  @apply w-full bg-transparent border-2 border-slate-400 rounded-md px-2 text-black;
+}
