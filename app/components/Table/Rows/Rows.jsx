@@ -4,9 +4,10 @@ import SingleRow from './SingleRow/SingleRow'
 function Rows({ data }) {
     return (
         <tbody key={'rows'}>
-            {data.map((item) => (
+            {data.map((item, index) => (
                 <SingleRow
                     item={item}
+                    key={index}
                 />
             ))}
         </tbody>

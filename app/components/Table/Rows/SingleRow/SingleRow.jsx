@@ -4,8 +4,12 @@ import EditableRow from "./EditableRow";
 import { useState } from "react";
 
 function SingleRow({ item }) {
-    const { 'ID Student': id, 'Mark': mark, 'Weight': weight, 'ID Teacher': teacher, 'ID Subject': subject, 'Date of issue': date } = item;
+    const { 'ID Student': id, 'Mark': mark, 'Weight': weight, 'ID Teacher': teacher, 'ID Subject': subject, 'Date of issue': dateObject, 'ID': gradeID } = item;
+    //switch editable or read-only (normal)
     const [editable, setEditable] = useState(false);
+
+    //convert date object to string format
+    const date = dateObject.toUTCString();
 
     const TriggerEdit = () => {
         setEditable((prev) => !prev);
@@ -20,6 +24,7 @@ function SingleRow({ item }) {
             subject={subject}
             date={date}
             TriggerEdit={TriggerEdit}
+            gradeID={gradeID}
         />
     }
 

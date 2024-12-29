@@ -20,7 +20,7 @@ function NormalRow({ id, mark, weight, subject, teacher, date, TriggerEdit }) {
                 <p className="text-sm text-slate-500">{teacher}</p>
             </td>
             <td className="p-4 py-5">
-                <p className="text-sm text-slate-500">{date?.toString()}</p>
+                <p className="text-sm text-slate-500">{date}</p>
             </td>
             <td className="p-4 py-5 w-[150px]">
                 <div className="flex items-center">
