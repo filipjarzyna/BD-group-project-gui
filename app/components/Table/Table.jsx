@@ -1,4 +1,3 @@
-import { rowStructure } from '@/app/lib/dataStructures';
 import Columns from './Columns/Columns';
 import Searchbar from './Searchbar'
 import Rows from './Rows/Rows';
@@ -6,15 +5,14 @@ import TableNav from './Pagination Nav/TableNav';
 
 const columns = ['ID Student', 'Mark', 'Weight', 'ID Teacher', 'ID Subject', 'Date', 'Edit'];
 
-// const rows = [
-//     rowStructure(1, 'jurek', 'ogorek', 4, 'Joanna Marchut', 'matematyka'),
-//     rowStructure(2, 'robert', 'kulski', 3, 'Joanna Marchut', 'matematyka'),
-//     rowStructure(1, 'jurek', 'ogorek', 2, 'Adam Stal', 'polski'),
-//     rowStructure(2, 'robert', 'kulski', 1, 'Katarzyna Nowak', 'angielski'),
-// ]
-
-
 function Table({ data, totalPages, curPage }) {
+
+    if (data === undefined || totalPages === 0) {
+        return <div className='h-[70svh] flex items-center justify-center'>
+        <p className='text-center'>Brak wyników</p>
+        </div>
+    }
+
     return (
         <div>
             <Searchbar />
@@ -28,7 +26,7 @@ function Table({ data, totalPages, curPage }) {
                     />
                 </table>
 
-                <TableNav 
+                <TableNav
                     curPage={curPage}
                     totalPages={totalPages}
                 />
