@@ -4,12 +4,15 @@ import SingleRow from './SingleRow/SingleRow'
 function Rows({ data }) {
     return (
         <tbody key={'rows'}>
-            {data.map((item, index) => (
-                <SingleRow
-                    item={item}
-                    key={index}
-                />
-            ))}
+            {data.map((item, index) => {
+                return (
+
+                    <SingleRow
+                        item={item}
+                        key={index}
+                    />
+                );
+            })}
         </tbody>
     )
 }

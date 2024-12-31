@@ -1,18 +1,16 @@
 import Table from "./components/Table/Table";
 import { fetchGradesPagination } from "./lib/fetchingSQL";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer } from 'react-toastify';
 
 export default async function Home({ searchParams }) {
   // const { recordset } = await fetchGrades({ page: 1 });
   const query = await searchParams;
-  console.log(query);
-  let { "page": curPage } = query;
+  let { "page": curPage = 1 } = query;
   curPage = Number(curPage);
 
   const { recordset, pagination } = await fetchGradesPagination({ PageNumber: curPage, PageSize: 8 });
-  const { 'TotalPages': totalPages } = pagination === undefined ? 0 : pagination[0] ;
-  
+  const { 'TotalPages': totalPages } = pagination === undefined ? 0 : pagination[0];
+
   return (
     <div className="h-[100vh] container mx-auto pt-10">
       <div className="flex justify-center">

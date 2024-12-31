@@ -4,12 +4,13 @@ import EditableRow from "./EditableRow";
 import { useState } from "react";
 
 function SingleRow({ item }) {
-    const { 'ID Student': id, 'Mark': mark, 'Weight': weight, 'ID Teacher': teacher, 'ID Subject': subject, 'Date of issue': dateObject, 'ID Mark': markID } = item;
-    //switch editable or read-only (normal)
+    const { 'ID Student': student, 'Mark': mark, 'Weight': weight, 'ID Teacher': teacher, 'ID Subject': subject, 'Date of issue': dateObject, 'ID Mark': markID } = item;
+    //switch between editable or read-only (normal)
     const [editable, setEditable] = useState(false);
 
     //convert date object to string format
     const date = dateObject.toUTCString();
+
 
     const TriggerEdit = () => {
         setEditable((prev) => !prev);
@@ -17,19 +18,19 @@ function SingleRow({ item }) {
 
     if (editable) {
         return <EditableRow
-            id={id}
+            student={student}
             mark={mark}
             weight={weight}
             teacher={teacher}
             subject={subject}
             date={date}
             TriggerEdit={TriggerEdit}
-            gradeID={markID}
+            markID={markID}
         />
     }
 
     return <NormalRow
-        id={id}
+        student={student} // when i pass {student} it works fine
         mark={mark}
         weight={weight}
         teacher={teacher}

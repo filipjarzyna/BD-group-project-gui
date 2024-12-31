@@ -3,8 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 import { useState } from "react";
 function Searchbar({defaultSearch}) {
     const [search, setSearch] = useState(defaultSearch || '');
-    
-    
+
     return (
         <div className="w-full flex justify-between items-center mb-3 mt-1">
             <div>

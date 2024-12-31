@@ -3,17 +3,20 @@ import { FaTrashCan, FaXmark } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { editGrade } from "@/app/lib/fetchingSQL";
+import { useRouter } from "next/navigation";
 
-function EditableRow({ id, mark, weight, subject, teacher, date, TriggerEdit, gradeID }) {
+function EditableRow({ student, mark, weight, subject, teacher, date, TriggerEdit, markID }) {
     // new edited row data
     const [rowData, setRowData] = useState({
-        id: id,
+        student: student,
         mark: mark,
         weight: weight,
         subject: subject,
         teacher: teacher,
-        date: date
     });
+    const router = useRouter();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,8 +26,35 @@ function EditableRow({ id, mark, weight, subject, teacher, date, TriggerEdit, gr
         }))
     };
 
-    const notify = () => {
+    const handleEditSubmit = async () => {
+        try {
+            const res = await editGrade({ markID, rowData });
+            if (res === undefined) {
+                throw new Error("failed to edit grade");
+            }
+            TriggerEdit({ newData: rowData });
+            notifySuccess();
+            router.refresh();
+        } catch (error) {
+            notifyError();
+        }
+    }
+
+
+    const notifySuccess = () => {
         toast.success('Pomyślnie wysłano!', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+        });
+    }
+
+    const notifyError = () => {
+        toast.error('Błąd podczas przesyłania', {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: true,
@@ -39,12 +69,11 @@ function EditableRow({ id, mark, weight, subject, teacher, date, TriggerEdit, gr
         <tr className="hover:bg-slate-50 border-b border-slate-200">
             <td className="p-4 py-5">
                 <input type="number" min={0}
-                    name="id"
-                    value={rowData.id}
+                    name="student"
+                    value={rowData.student}
                     className='editable'
                     onChange={(e) => handleChange(e)}
                 />
-                {/* <p className="block font-semibold text-sm text-slate-800">{id}</p> */}
             </td>
             <td className="p-4 py-5 text-sm text-slate-500">
                 <input type="number"
@@ -52,7 +81,7 @@ function EditableRow({ id, mark, weight, subject, teacher, date, TriggerEdit, gr
                     max={6} min={1}
                     value={rowData.mark}
                     className='editable'
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
 
                 />
             </td>
@@ -87,9 +116,7 @@ function EditableRow({ id, mark, weight, subject, teacher, date, TriggerEdit, gr
                 <div className="flex justify-around">
                     <FaCheck className="text-green-700 hover:cursor-pointer hover:scale-105 hover:text-green-900"
                         onClick={() => {
-                            console.log(rowData);
-                            notify();
-                            TriggerEdit();
+                            handleEditSubmit();
                         }}
                     />
                     <FaXmark

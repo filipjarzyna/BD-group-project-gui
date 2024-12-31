@@ -1,11 +1,11 @@
 'use client'
 import { FaEdit } from "react-icons/fa";
 
-function NormalRow({ id, mark, weight, subject, teacher, date, TriggerEdit }) {
+function NormalRow({ student, mark, weight, subject, teacher, date, TriggerEdit }) {
     return (
         <tr className="hover:bg-slate-50 border-b border-slate-200">
             <td className="p-4 py-5 w-[100px]">
-                <p className="block font-semibold text-sm text-slate-800">{id}</p>
+                <p className="block font-semibold text-sm text-slate-800">{student}</p>
             </td>
             <td className="p-4 py-5 w-[100px]">
                 <p className="text-sm text-slate-500">{mark}</p>

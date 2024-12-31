@@ -6,12 +6,14 @@ import TableNav from './Pagination Nav/TableNav';
 const columns = ['ID Student', 'Mark', 'Weight', 'ID Teacher', 'ID Subject', 'Date', 'Edit'];
 
 function Table({ data, totalPages, curPage }) {
-
+    
+    
     if (data === undefined || totalPages === 0) {
         return <div className='h-[70svh] flex items-center justify-center'>
         <p className='text-center'>Brak wyników</p>
         </div>
     }
+
 
     return (
         <div>

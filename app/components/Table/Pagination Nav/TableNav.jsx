@@ -3,9 +3,9 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 function TableNav({ curPage = 1, totalPages = 1 }) {
-    const router = useRouter() // 
-    const searchParams = useSearchParams()
+    const searchParams = useSearchParams();
     const [pageInput, setPageInput] = useState(curPage);
+    const router = useRouter();
 
     const handlePage = (e, { newVal }) => {
         // e.preventDefault();
@@ -17,7 +17,7 @@ function TableNav({ curPage = 1, totalPages = 1 }) {
             params.set('page', newVal);
         }
 
-        router.push(`?${params.toString()}`);
+        router.push(`?${params.toString()}`, undefined, { shallow: false });
     }
 
 
