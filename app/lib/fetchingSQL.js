@@ -85,10 +85,12 @@ export const fetchGradesPagination = async ({ PageNumber = 1, PageSize = 8 }) =>
 export const fetchSugestionsForForm = async ({ teacher = '', student = '', subject = '' }) => {
     try {
         //validate data
-        console.log('{ teacher, student, subject }', { teacher, student, subject })
+
+
+
+
         const db = await getDBConnection();
         const res = await db.request().query(`EXEC GetStudentsTeachersSubjects @StudentName = '${student}', @SubjectName = '${subject}', @TeacherName = '${teacher}'`);
-        console.log(res);
         const { recordsets } = res;
         return { recordsets };
     } catch (error) {
