@@ -16,15 +16,40 @@ function AddMarkForm() {
 
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        let studentID = -1;
+        let teacherID = -1;
+        let subjectID = -1;
 
+        for (i in students) {
+            if (i.toLowerCase() === formData.student.toLowerCase()) {
+                studentID = i['ID Student'];
+                break;
+            }
+        }
+        for (i in teachers) {
+            if (i.toLowerCase() === formData.student.toLowerCase()) {
+                studentID = i['ID Teacher'];
+                break;
+            }
+        }
+        for (i in subjects) {
+            if (i.toLowerCase() === formData.subject.toLowerCase()) {
+                subjectID = i['ID Subject'];
+                break;
+            }
+        }
     }
 
     const fetchList = async () => {
-        const { recordsets } = await fetchSugestionsForForm(formData);
-        console.log("Client res:", recordsets);
-        if (recordsets !== undefined) {
-            setList({ students: recordsets[0], teachers: recordsets[1], subjects: recordsets[2] })
+        try {
+            const { recordsets } = await fetchSugestionsForForm(formData);
+            console.log("Client res:", recordsets);
+            if (recordsets !== undefined) {
+                setList({ students: recordsets[0], teachers: recordsets[1], subjects: recordsets[2] })
+            }
+        } catch (error) {
+
         }
     }
 
@@ -41,7 +66,7 @@ function AddMarkForm() {
                     Student
                     <input
                         id="student"
-                        type="text"
+                        type="select"
                         name="student"
                         list="students"
                         onChange={(e) => handleChange(e)}
