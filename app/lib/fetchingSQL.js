@@ -46,8 +46,7 @@ export const deleteGrade = async ({ markID }) => {
 export const addGrade = async ({ student, mark, weight, subject, teacher }) => {
     try {
         //validate data
-
-
+        
 
 
         const db = await getDBConnection();

@@ -27,3 +27,8 @@ body {
 input.editable {
   @apply w-full bg-transparent border-2 border-slate-400 rounded-md px-2 text-black;
 }
+
+
+.navLink {
+  @apply hover:text-white hover:scale-105 transition duration-75
+}
