@@ -2,9 +2,9 @@
 import { FaTrashCan, FaXmark } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
-import { toast } from "react-toastify";
-import { editGrade } from "@/app/lib/fetchingSQL";
+import { deleteGrade, editGrade } from "@/app/lib/fetchingSQL";
 import { useRouter } from "next/navigation";
+import { notifyError, notifySuccess } from "@/app/components/toastNotifications";
 
 function EditableRow({ student, mark, weight, subject, teacher, date, TriggerEdit, markID }) {
     // new edited row data
@@ -26,44 +26,35 @@ function EditableRow({ student, mark, weight, subject, teacher, date, TriggerEdi
         }))
     };
 
+
     const handleEditSubmit = async () => {
         try {
             const res = await editGrade({ markID, rowData });
             if (res === undefined) {
                 throw new Error("failed to edit grade");
             }
-            TriggerEdit({ newData: rowData });
-            notifySuccess();
+            TriggerEdit();
+            notifySuccess({ message: 'Successfully Edited' });
             router.refresh();
         } catch (error) {
-            notifyError();
+            notifyError({ message: 'Error sending data' });
+        }
+    }
+    
+    const handleDeleteSubmit = async () => {
+        try {
+            const res = await deleteGrade({ markID });
+            if (res === undefined) {
+                throw new Error('Error deleting grade');
+            }
+            TriggerEdit();
+            notifySuccess({ message: 'Successfully deleted grade' });
+            router.refresh();
+        } catch (error) {
+            notifyError({ message: 'Error deleting grade' })
         }
     }
 
-
-    const notifySuccess = () => {
-        toast.success('Pomyślnie wysłano!', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        });
-    }
-
-    const notifyError = () => {
-        toast.error('Błąd podczas przesyłania', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        });
-    }
 
     return (
         <tr className="hover:bg-slate-50 border-b border-slate-200">
@@ -115,14 +106,14 @@ function EditableRow({ student, mark, weight, subject, teacher, date, TriggerEdi
             <td className="p-4 py-5">
                 <div className="flex justify-around">
                     <FaCheck className="text-green-700 hover:cursor-pointer hover:scale-105 hover:text-green-900"
-                        onClick={() => {
-                            handleEditSubmit();
-                        }}
+                        onClick={() => handleEditSubmit()}
                     />
                     <FaXmark
                         className="hover:scale-105 hover:cursor-pointer hover:text-black"
                         onClick={() => TriggerEdit()} />
-                    <FaTrashCan className="hover: cursor-pointer hover:scale-105 hover:text-black" />
+                    <FaTrashCan className="hover: cursor-pointer hover:scale-105 hover:text-black"
+                        onClick={() => handleDeleteSubmit()}
+                    />
                 </div>
             </td>
         </tr>

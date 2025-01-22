@@ -17,7 +17,7 @@ function Table({ data, totalPages, curPage }) {
 
     return (
         <div>
-            <Searchbar />
+            {/* <Searchbar /> */}
             <div className="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
                 <table className="w-full text-left">
                     <Columns

@@ -1,5 +1,5 @@
 
-function AddMarkInput({ name, listName, handleChange, customCSS = '', inputType = 'text' }) {
+function AddMarkInput({ name, listName, handleChange, customCSS = '', inputType = 'text', value}) {
     return (
         <div>
             <label htmlFor={name} className={`flex flex-col mb-2 ${customCSS}`}>
@@ -13,6 +13,7 @@ function AddMarkInput({ name, listName, handleChange, customCSS = '', inputType 
                     list={listName}
                     onChange={(e) => handleChange(e)}
                     className="text-black px-2 py-1 rounded"
+                    value={value}
                 />
             </label>
 

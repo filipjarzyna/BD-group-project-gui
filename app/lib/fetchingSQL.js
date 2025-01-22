@@ -13,12 +13,13 @@ export const fetchGrades = async ({ page }) => {
 export const editGrade = async ({ markID, rowData: { student, mark, weight, subject, teacher } }) => {
     try {
         //validate data
-
-
-
+        markID = Number(markID);
+        if (isNaN(markID) || markID < 1) {
+            throw new Error(`Invalid mark type ${typeof (markID)} : ${markID}`)
+        }
 
         const db = await getDBConnection();
-        const res = await db.request().query(`EXEC EditMarkByID @MarkID = ${Number(markID)}, @StudentID = ${student}, @Mark = ${mark}, @Weight = ${weight}, @SubjectID = ${subject}, @TeacherID = ${teacher}`);
+        const res = await db.request().query(`EXEC EditMarkByID @MarkID = ${markID}, @StudentID = ${student}, @Mark = ${mark}, @Weight = ${weight}, @SubjectID = ${subject}, @TeacherID = ${teacher}`);
         return res;
     } catch (error) {
         console.log(error);
@@ -45,13 +46,17 @@ export const deleteGrade = async ({ markID }) => {
 //adds new grade to the database
 export const addGrade = async ({ student, mark, weight, subject, teacher }) => {
     try {
-        //validate data
-        
 
+        //validate data
+        // if (isNaN(student) || isNaN(mark) || isNaN(weight) || isNaN(teacher) || isNaN(subject) || subject < 0 || student < 0 || mark < 0 || mark > 6 || teacher < 0 || weight < 0 || weight > 6) {
+        //     throw new Error("invalid data");
+        // }
 
         const db = await getDBConnection();
-        const res = await db.request().query(`EXEC AddNewMark @StudentID = ${student}, @Mark = ${mark}, @Weight = ${weight}, @SubjectID = ${subject}, @TeacherID = ${teacher}`);
-        return res;
+        // const res = 
+        await db.request().query(`EXEC AddNewMark @StudentID = ${student}, @Mark = ${mark}, @Weight = ${weight}, @SubjectID = ${subject}, @TeacherID = ${teacher}`);
+        
+        return 1;
     } catch (error) {
         console.log(error);
         return undefined;
@@ -85,12 +90,10 @@ export const fetchSugestionsForForm = async ({ teacher = '', student = '', subje
     try {
         //validate data
 
-
-
-
         const db = await getDBConnection();
         const res = await db.request().query(`EXEC GetStudentsTeachersSubjects @StudentName = '${student}', @SubjectName = '${subject}', @TeacherName = '${teacher}'`);
         const { recordsets } = res;
+        // console.log("recordsets: ", recordsets);
         return { recordsets };
     } catch (error) {
         console.log(error);
