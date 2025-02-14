@@ -40,6 +40,7 @@ export default function RootLayout({ children }) {
           theme="light"
         />
         {children}
+        <div className="fixed bottom-0 text-center w-full pb-4"> Projekt Bazy Danych - Filip Jarzyna & Filip Rutka</div>
       </body>
     </html>
   );

@@ -111,7 +111,7 @@ function EditableRow({ student, mark, weight, subject, teacher, date, TriggerEdi
                     <FaXmark
                         className="hover:scale-105 hover:cursor-pointer hover:text-black"
                         onClick={() => TriggerEdit()} />
-                    <FaTrashCan className="hover: cursor-pointer hover:scale-105 hover:text-black"
+                    <FaTrashCan className="hover: cursor-pointer hover:scale-105 text-red-800 hover:text-red-600"
                         onClick={() => handleDeleteSubmit()}
                     />
                 </div>
