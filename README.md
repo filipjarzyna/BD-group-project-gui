@@ -19,9 +19,9 @@ This is a group project for a school database system, this is the frontend part 
    
 
 ## SQL Server Part
-In this project we use SQL Server for our database. You can find necessary files to recreate our School Database [here](https://github.com/filipjarzyna/BD-group-project-Database).
+This project uses SQL Server as its database. You can find necessary files to recreate our School Database [here](https://github.com/filipjarzyna/BD-group-project-Database).
 ### 
-Run the [generating script](https://github.com/filipjarzyna/BD-group-project-Database/blob/main/SchoolDatabase.sql), You can use programs like SQL Server Managment Studio or Azure Data Studio. After that you should see database named 'School' appear. For frontend to work you need to create a user that will enable Next.js to create a connection with our database. 
+Run the database [generation script](https://github.com/filipjarzyna/BD-group-project-Database/blob/main/SchoolDatabase.sql), You can use programs like SQL Server Managment Studio or Azure Data Studio. After that you should see database named 'School' appear. For frontend to work you need to create a user that will enable Next.js to create a connection with our database. 
 You can use this query (change names and password):
 ```tsql
 CREATE LOGIN YourUserName WITH PASSWORD = 'YourStrongPassword';
@@ -31,7 +31,16 @@ GRANT EXECUTE TO YourUserNameForDB;
 ```
 This should create a new user with EXECUTE privileges.
 ### Next.js part
-To enable Next.js to connect to our database you need to save created user credentials in .env file (that you should create in place of [your.env](/your.env)).
+To enable Next.js to connect to our database you need to save created user 
+credentials in .env file (that you should create in place of [your.env](/your.env)).
+Your .env file should look like this:
+```env
+DB_SERVER=localhost
+DB_USER=YourUserNameForDB
+DB_PASSWORD=YourStrongPassword
+DB_DATABASE=School
+DB_PORT=1433
+```
 
 Then you should be able to run the development server:
 ```bash
