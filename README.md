@@ -9,12 +9,13 @@ This is a group project for a school database system, this is the frontend part 
 
 
 ### Student Grades Table  
-![image](https://github.com/user-attachments/assets/7c03301c-00ef-4a2c-8bce-d03f5a756c44)
+![image](https://github.com/user-attachments/assets/02f33c4b-24de-46ae-89ff-cde4d0e9c7b3)
+
    A simple and intuitive table that allows direct viewing of data from the **Marks** table (which stores student grades). The table enables easy **editing** and **deletion** of rows, providing a user-friendly interface for managing grades.
 
 
 ### Grade Submission Form  
-![image](https://github.com/user-attachments/assets/141dcf06-0852-4035-ac28-3f712616731a)
+![image](https://github.com/user-attachments/assets/645d4bef-d8c5-4b9e-a325-75441fc13715)
    The second feature includes a straightforward form for adding new grades. The form is equipped with **autosuggestions** to streamline data entry and ensure accuracy.
    
 
